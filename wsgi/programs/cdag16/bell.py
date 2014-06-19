@@ -45,7 +45,7 @@ class BELL(object):
 // axis_plane_assembly 組立函式
 ////////////////////////////////////////////////
 function axis_plane_assembly(session, assembly, transf, featID, inc, part2, axis1, plane1, axis2, plane2){
-var descr = pfcCreate("pfcModelDescriptor").CreateFromFileName ("v:/home/lego/man/"+part2);
+var descr = pfcCreate("pfcModelDescriptor").CreateFromFileName ("v:/home/dumbbell/"+part2);
 var componentModel = session.GetModelFromDescr(descr);
 var componentModel = session.RetrieveModel(descr);
 if (componentModel != void null)
