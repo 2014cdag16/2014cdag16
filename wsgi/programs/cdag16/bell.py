@@ -91,7 +91,7 @@ asmcomp.SetConstraints(constrs, void null);
 // three_plane_assembly 採 align 組立, 若 featID 為 0 表示為空組立檔案
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 function three_plane_assembly(session, assembly, transf, featID, inc, part2, plane1, plane2, plane3, plane4, plane5, plane6){
-var descr = pfcCreate("pfcModelDescriptor").CreateFromFileName ("v:/home/lego/man/"+part2);
+var descr = pfcCreate("pfcModelDescriptor").CreateFromFileName ("v:/home/dumbbell/"+part2);
 var componentModel = session.GetModelFromDescr(descr);
 var componentModel = session.RetrieveModel(descr);
 if (componentModel != void null)
@@ -146,6 +146,51 @@ if (featID == 0)
     return first_featID;
 }
 // 以上為 three_plane_assembly() 函式
+
+
+
+function axis1_plane2_assembly(session, assembly, transf, featID, inc, part2, axis1, plane1, plane2, axis2, plane3,plane4){
+var descr = pfcCreate("pfcModelDescriptor").CreateFromFileName ("v:/home/dumbbell/"+part2);
+var componentModel = session.GetModelFromDescr(descr);
+var componentModel = session.RetrieveModel(descr);
+if (componentModel != void null)
+{
+    var asmcomp = assembly.AssembleComponent (componentModel, transf);
+}
+var ids = pfcCreate("intseq");
+ids.Append(featID+inc);
+var subPath = pfcCreate("MpfcAssembly").CreateComponentPath(assembly, ids);
+subassembly = subPath.Leaf;
+var asmDatums = new Array(axis1, plane1,plane2);
+var compDatums = new Array(axis2, plane3,plane4);
+var relation = new Array (pfcCreate("pfcComponentConstraintType").ASM_CONSTRAINT_ALIGN, pfcCreate("pfcComponentConstraintType").ASM_CONSTRAINT_MATE, pfcCreate("pfcComponentConstraintType").ASM_CONSTRAINT_MATE);
+var relationItem = new Array(pfcCreate("pfcModelItemType").ITEM_AXIS, pfcCreate("pfcModelItemType").ITEM_SURFACE, pfcCreate("pfcModelItemType").ITEM_SURFACE);
+var constrs = pfcCreate("pfcComponentConstraints");
+    for (var i = 0; i < 3; i++)
+    {
+        var asmItem = subassembly.GetItemByName (relationItem[i], asmDatums [i]);
+        if (asmItem == void null)
+        {
+            interactFlag = true;
+            continue;
+        }
+        var compItem = componentModel.GetItemByName (relationItem[i], compDatums [i]);
+        if (compItem == void null)
+        {
+            interactFlag = true;
+            continue;
+        }
+        var MpfcSelect = pfcCreate ("MpfcSelect");
+        var asmSel = MpfcSelect.CreateModelItemSelection (asmItem, subPath);
+        var compSel = MpfcSelect.CreateModelItemSelection (compItem, void null);
+        var constr = pfcCreate("pfcComponentConstraint").Create (relation[i]);
+        constr.AssemblyReference  = asmSel;
+        constr.ComponentReference = compSel;
+        constr.Attributes = pfcCreate("pfcConstraintAttributes").Create (true, false);
+        constrs.Append(constr);
+    }
+asmcomp.SetConstraints(constrs, void null);
+}
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 // three_plane_assembly2 採 mate 組立, 若 featID 為 0 表示為空組立檔案
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -247,11 +292,12 @@ var assembly = model;
 // 若 featID=0 表示為空組立檔案, 而且函式會傳回第一個組立件的 featID
 var featID = three_plane_assembly(session, assembly, transf, 0, 0, "dumbbell_axis.prt", "ASM_TOP", "ASM_FRONT", "ASM_RIGHT", "TOP", "FRONT", "RIGHT"); 
 // 利用函式呼叫組立左邊 ARM, 組立增量次序為 1
-axis_plane_assembly(session, assembly, transf, featID, 0, 
-                              "dumbbell.prt", "A_5", "DTM1", "A_4", "DTM1");
+
+axis1_plane2_assembly(session, assembly, transf, featID, 0, 
+                              "dumbbell.prt", "A_5", "DTM1", "DTM3", "A_4", "DTM1","DTM2");
 // 利用函式呼叫組立右邊 ARM, 組立增量次序為 2
-axis_plane_assembly(session, assembly, transf, featID, 0, 
-                              "dumbbell.prt", "A_5", "DTM2", "A_4", "DTM1");
+axis1_plane2_assembly(session, assembly, transf, featID, 0, 
+                              "dumbbell.prt", "A_5", "DTM2", "DTM3", "A_4", "DTM1","DTM2");
 
 // regenerate 並且 repaint 組立檔案
 assembly.Regenerate (void null);

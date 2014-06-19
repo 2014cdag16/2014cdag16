@@ -32,8 +32,8 @@
 <v t="course-mde-tw.20140417093332.2027" a="E"><vh>@path wsgi</vh>
 <v t="course-mde-tw.20140417093332.2028" a="E"
 expanded="course-mde-tw.20140417093332.2030,"><vh>@file application</vh></v>
-<v t="2014spring.20140508134612.2197" a="E"
-expanded="2014spring.20140508134612.2221,2014spring.20140508134612.2262,"><vh>@file cmsimply.py</vh></v>
+<v t="2014spring.20140508134612.2197"
+expanded="2014spring.20140508134612.2262,"><vh>@file cmsimply.py</vh></v>
 </v>
 <v t="2014spring.20140503125211.2097" a="E"><vh>分組程式開發</vh>
 <v t="2014spring.20140503125211.2098" a="E"><vh>@path wsgi/programs/cdag1</vh>
@@ -93,7 +93,7 @@ expanded="2014spring.20140508134612.2221,2014spring.20140508134612.2262,"><vh>@f
 <v t="2014spring.20140513154549.2230"><vh>@edit __init__.py</vh></v>
 <v t="2014pythonE.20140619181358.1827"><vh>@edit bell.py</vh></v>
 </v>
-<v t="2014spring.20140513092629.2151"><vh>@path wsgi/programs/cdag17</vh>
+<v t="2014spring.20140513092629.2151" a="E"><vh>@path wsgi/programs/cdag17</vh>
 <v t="2014spring.20140513092629.2152"><vh>@edit __init__.py</vh></v>
 </v>
 <v t="2014spring.20140506174436.1831" a="E"><vh>@path wsgi/programs/cdag30</vh>
