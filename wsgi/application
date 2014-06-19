@@ -206,6 +206,8 @@ import programs.cdag16 as cdag16
 root.cdag16 = cdag16.CDAG16()
 import programs.cdag16.man as cdag16_man
 root.cdag16.man = cdag16_man.MAN()
+import programs.cdag16.bell as cdag16_bell
+root.cdag16.bell = cdag16_bell.BELL()
 import programs.cdag17 as cdag17
 root.cdag17 = cdag17.CDAG17()
 
