@@ -294,10 +294,10 @@ var featID = three_plane_assembly(session, assembly, transf, 0, 0, "dumbbell_axi
 // 利用函式呼叫組立左邊 ARM, 組立增量次序為 1
 
 axis1_plane2_assembly(session, assembly, transf, featID, 0, 
-                              "dumbbell.prt", "A_5", "DTM1", "DTM3", "A_4", "DTM1","DTM2");
+                              "dumbbell.prt", "A_5", "DTM4", "DTM3", "A_4", "DTM3","DTM2");
 // 利用函式呼叫組立右邊 ARM, 組立增量次序為 2
 axis1_plane2_assembly(session, assembly, transf, featID, 0, 
-                              "dumbbell.prt", "A_5", "DTM2", "DTM3", "A_4", "DTM1","DTM2");
+                              "dumbbell.prt", "A_5", "DTM5", "DTM3", "A_4", "DTM3","DTM2");
 
 // regenerate 並且 repaint 組立檔案
 assembly.Regenerate (void null);
